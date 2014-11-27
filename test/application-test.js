@@ -6,6 +6,7 @@
             expect(window.foo('Luis')).toBeDefined();
 
             expect(false).toBeFalsy();
+            expect(false).toBeFalsy();
         });
     });
 } ());

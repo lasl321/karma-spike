@@ -6,7 +6,6 @@
     };
 
     function doSomething(someVariable) {
-        var x;
 return 'this is a variable ' + someVariable;
     }
 } ());
