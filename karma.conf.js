@@ -1,6 +1,17 @@
 // Karma configuration
 // Generated on Wed Nov 26 2014 21:43:48 GMT-0800 (Pacific Standard Time)
 
+var reporters = [
+    { type: 'html', subdir: 'report-html' }
+];
+
+if (!!process.env.TEAMCITY) {
+     reporters.push({ type: 'teamcity' });
+} else {
+     reporters.push({ type: 'text' });
+     reporters.push({ type: 'text-summary' });
+}
+
 module.exports = function(config) {
   config.set({
 
@@ -28,10 +39,16 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        './application/**/*.js': ['coverage']
+        './application/**/*.js': ['jshint', 'coverage'],
+        './test/**/*.js': ['jshint']
     },
 
+    jshintPreprocessor: {
+       stopOnError: true,
 
+       jshintrc: './.jshintrc'
+    },
+  
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
@@ -40,18 +57,7 @@ module.exports = function(config) {
     coverageReporter: {
       // specify a common output directory
       dir: 'build/reports/coverage',
-      reporters: [
-        // reporters not supporting the `file` property
-        { type: 'html', subdir: 'report-html' },
-        { type: 'lcov', subdir: 'report-lcov' },
-        // reporters supporting the `file` property, use `subdir` to directly
-        // output them in the `dir` directory
-        { type: 'cobertura', subdir: '.', file: 'cobertura.txt' },
-        { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
-        { type: 'teamcity' },
-        { type: 'text', subdir: '.', file: 'text.txt' },
-        { type: 'text-summary', subdir: '.', file: 'text-summary.txt' },
-      ]
+      reporters: reporters
     },
 
     // web server port
@@ -78,6 +84,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true 
+    singleRun: false 
   });
 };

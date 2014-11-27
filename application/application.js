@@ -1,7 +1,12 @@
 (function () {
-    "use strict";
+    'use strict';
 
     window.foo = function (message) {
-        console.log("Echo: " + message);
+        return ('Echo: ' + message);
     };
+
+    function doSomething(someVariable) {
+        var x;
+return 'this is a variable ' + someVariable;
+    }
 } ());

@@ -1,0 +1,10 @@
+{
+    "undef": true,
+    "browser": true,
+    "globals": {
+        "angular": true,
+        "it": false,
+        "describe": false,
+        "expect": false
+    }
+}
